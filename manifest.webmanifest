@@ -1,0 +1,15 @@
+{
+  "name": "Maths Genius",
+  "short_name": "Maths Genius",
+  "description": "Maths games for Australian primary children. Works offline after the first visit.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fff6ea",
+  "theme_color": "#0e7c66",
+  "lang": "en-AU",
+  "icons": [
+    { "src": "./assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
