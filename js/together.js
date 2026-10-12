@@ -151,7 +151,10 @@
       panel.className = "panel";
       panel.innerHTML = '<p class="note">Room code</p><p class="room-code"></p><p class="note relay"></p><p class="toast"></p>';
       panel.querySelector(".room-code").textContent = code;
-      panel.querySelector(".relay").textContent = note || "Share this code with a friend. Up to 4 players.";
+      const waiting = iAmHost && rosterList().length < 2
+        ? "Share this code with a friend. Up to 4 players. Tic tac toe starts when someone joins."
+        : "Share this code with a friend. Up to 4 players.";
+      panel.querySelector(".relay").textContent = note || waiting;
       panel.querySelector(".toast").textContent = toast;
       renderPeople(panel);
       const actions = document.createElement("div");
