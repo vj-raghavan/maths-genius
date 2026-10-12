@@ -45,6 +45,10 @@
     let waitTimer = 0;
     let relayTimer = 0;
     let closed = false;
+    let xoHandle = null;
+    let xoMaths = true;
+    let xoBoard = ["", "", "", "", "", "", "", "", ""];
+    let xoTurn = "X";
 
     function me() {
       return MGNet && MGNet.selfId ? MGNet.selfId : "";
@@ -53,6 +57,7 @@
     function shutdown() {
       closed = true;
       builderDestroy();
+      xoHandle = null;
       window.clearTimeout(waitTimer);
       window.clearInterval(relayTimer);
       if (room) {
@@ -115,7 +120,7 @@
       builderDestroy = function () {};
       body.innerHTML = "";
       if (mode === "pick") {
-        body.innerHTML = '<div class="panel"><p>Make a private room and read the code to a friend. There is no public list of rooms, and there is no chat. Only a first name and an avatar are shared. Age and grade stay on this device.</p>' +
+        body.innerHTML = '<div class="panel"><p>Make a private room and read the code to a friend. There is no public list of rooms, and there is no chat. Only a first name and an avatar are shared. Age and grade stay on this device. In a room you can race, build, or play tic tac toe.</p>' +
           '<div class="row-actions"><button type="button" class="btn primary create">Create a room</button></div>' +
           '<label class="field">Room code<input class="code-input" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false"></label>' +
           '<button type="button" class="btn secondary join">Join with code</button><p class="note status"></p></div>';
@@ -175,6 +180,23 @@
           startRace(seed, chosen);
         });
         actions.appendChild(race);
+        const opponent = rosterList().filter(function (person) { return person.id !== hostId; })[0];
+        if (opponent) {
+          const maths = document.createElement("label");
+          maths.className = "field";
+          maths.innerHTML = "<span><input class='xo-maths' type='checkbox' checked> Answer a question to claim a square</span>";
+          panel.appendChild(maths);
+          const xoBtn = document.createElement("button");
+          xoBtn.type = "button";
+          xoBtn.className = "btn primary";
+          xoBtn.textContent = "Play tic tac toe";
+          xoBtn.addEventListener("click", function () {
+            const useMaths = !!(panel.querySelector(".xo-maths") && panel.querySelector(".xo-maths").checked);
+            sendAction({ t: "xo", maths: useMaths });
+            startXo(useMaths);
+          });
+          actions.appendChild(xoBtn);
+        }
       }
       if (mode === "lobby") {
         const build = document.createElement("button");
@@ -208,6 +230,7 @@
       body.appendChild(stage);
       if (mode === "race") renderRace(stage);
       if (mode === "build") renderBuild(stage);
+      if (mode === "xo") renderXo(stage);
     }
 
     function renderRace(stage) {
@@ -264,6 +287,71 @@
       render();
     }
 
+    function xoRole() {
+      if (iAmHost || me() === hostId) return "X";
+      const others = rosterList().filter(function (person) { return person.id !== hostId; });
+      if (others[0] && others[0].id === me()) return "O";
+      return "watch";
+    }
+
+    function startXo(useMaths) {
+      mode = "xo";
+      xoMaths = !!useMaths;
+      xoBoard = ["", "", "", "", "", "", "", "", ""];
+      xoTurn = "X";
+      xoHandle = null;
+      render();
+    }
+
+    function broadcastXo() {
+      sendAction({ t: "xosync", board: xoBoard, turn: xoTurn, maths: xoMaths });
+    }
+
+    function acceptMove(index, mark) {
+      if (!xoHandle || !xoHandle.applyMove(index, mark)) return;
+      xoBoard = xoHandle.board();
+      xoTurn = xoHandle.turn();
+      sendAction({ t: "xomove", i: index, mark: mark });
+    }
+
+    function passTurn() {
+      xoTurn = xoTurn === "X" ? "O" : "X";
+      if (xoHandle) xoHandle.sync(xoBoard, xoTurn);
+      broadcastXo();
+    }
+
+    function renderXo(stage) {
+      const names = rosterList();
+      const xPerson = names.filter(function (person) { return person.id === hostId; })[0];
+      const oPerson = names.filter(function (person) { return person.id !== hostId; })[0];
+      xoHandle = MGTic.attachShared(stage, {
+        role: xoRole(),
+        maths: xoMaths,
+        level: MGQuestions.playingLevel(profile.grade, profile.maths.adjust),
+        xName: xPerson ? xPerson.name : "X",
+        oName: oPerson ? oPerson.name : "O",
+        onIntent: function (index) {
+          if (iAmHost) acceptMove(index, "X");
+          else if (hostId) sendAction({ t: "xowish", i: index }, hostId);
+        },
+        onPass: function () {
+          if (iAmHost) passTurn();
+          else if (hostId) sendAction({ t: "xopass" }, hostId);
+        },
+        onLeave: function () {
+          if (iAmHost) sendAction({ t: "xodone" });
+          mode = "lobby";
+          xoHandle = null;
+          note = "Tic tac toe finished.";
+          render();
+        },
+        onFinish: function (outcome) {
+          if (outcome !== "watch") MGTic.record(profile, outcome);
+        }
+      });
+      if (xoBoard.some(function (cell) { return cell; }) || xoTurn !== "X") xoHandle.sync(xoBoard, xoTurn);
+    }
+
     function renderBuild(stage) {
       const handle = MGBuilder.mount(stage, profile, function () { mode = "lobby"; render(); }, {
         shared: true,
@@ -304,7 +392,10 @@
           const boardList = body.querySelector(".board");
           if (boardList) paintBoard(boardList);
         }
-        if (iAmHost) broadcastHello();
+        if (iAmHost) {
+          broadcastHello();
+          if (mode === "xo") sendAction({ t: "xosync", board: xoBoard, turn: xoTurn, maths: xoMaths }, peerId);
+        }
         return;
       }
       if (data.t === "full") {
@@ -343,6 +434,44 @@
       if (data.t === "blocks" && peerId === hostId && !iAmHost) {
         world = cleanBlocks(data.blocks);
         if (applyWorld) applyWorld(world);
+        return;
+      }
+      if (data.t === "xo" && !iAmHost) {
+        startXo(!!data.maths);
+        return;
+      }
+      if (data.t === "xowish" && iAmHost && mode === "xo") {
+        if (xoTurn === "O") acceptMove(Number(data.i), "O");
+        return;
+      }
+      if (data.t === "xopass" && iAmHost && mode === "xo") {
+        passTurn();
+        return;
+      }
+      if (data.t === "xomove" && !iAmHost && mode === "xo" && xoHandle) {
+        xoHandle.applyMove(Number(data.i), data.mark === "O" ? "O" : "X");
+        xoBoard = xoHandle.board();
+        xoTurn = xoHandle.turn();
+        return;
+      }
+      if (data.t === "xosync" && !iAmHost) {
+        const nextBoard = [];
+        const raw = Array.isArray(data.board) ? data.board : [];
+        for (let i = 0; i < 9; i += 1) nextBoard[i] = raw[i] === "X" || raw[i] === "O" ? raw[i] : "";
+        xoBoard = nextBoard;
+        xoTurn = data.turn === "O" ? "O" : "X";
+        xoMaths = !!data.maths;
+        if (mode !== "xo") {
+          mode = "xo";
+          render();
+        } else if (xoHandle) xoHandle.sync(xoBoard, xoTurn);
+        return;
+      }
+      if (data.t === "xodone" && mode === "xo") {
+        mode = "lobby";
+        xoHandle = null;
+        note = "Tic tac toe finished.";
+        render();
       }
     }
 
@@ -376,8 +505,18 @@
             end("The host left, so this room has ended.");
             return;
           }
+          const others = rosterList().filter(function (person) { return person.id !== hostId; });
+          const wasOpponent = others[0] && others[0].id === peerId;
           delete people[peerId];
           note = (name || "A player") + " left the room.";
+          if (mode === "xo" && wasOpponent) {
+            if (iAmHost) sendAction({ t: "xodone" });
+            mode = "lobby";
+            xoHandle = null;
+            note = (name || "A player") + " left, so tic tac toe has ended.";
+            render();
+            return;
+          }
           if (mode === "lobby") render();
           else if (mode !== "ended") {
             const relay = body.querySelector(".relay");

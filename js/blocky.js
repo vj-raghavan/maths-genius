@@ -163,6 +163,7 @@
         MGStorage.update(profile.id, function (draft) {
           draft.blocky.highScore = Math.max(draft.blocky.highScore, score);
           draft.blocky.characterId = character.id;
+          MGStorage.earn(draft, correctCount);
         });
         const best = MGStorage.get(profile.id).blocky.highScore;
         window.removeEventListener("keydown", onKey);

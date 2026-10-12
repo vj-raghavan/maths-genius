@@ -58,13 +58,19 @@
 
   function portrait(profile, className) {
     const avatar = profile.avatar || MGStorage.blankProfile().avatar;
+    const klass = className || "portrait";
+    let inner;
     if (avatar.mode === "animal") {
       const animals = (window.MG_LIBRARY && MG_LIBRARY.animals) || [];
       const found = animals.find(function (animal) { return animal.id === avatar.animal; }) || animals[0];
-      if (!found) return '<span class="' + (className || "portrait") + ' portrait-fallback"></span>';
-      return '<img class="' + (className || "portrait") + '" src="' + esc(found.src) + '" alt="' + esc(found.name) + '">';
-    }
-    return '<span class="' + (className || "portrait") + ' portrait-svg">' + MGAvatar.svg(avatar.custom) + "</span>";
+      inner = found
+        ? '<img class="' + klass + '" src="' + esc(found.src) + '" alt="' + esc(found.name) + '">'
+        : '<span class="' + klass + ' portrait-fallback"></span>';
+    } else inner = '<span class="' + klass + ' portrait-svg">' + MGAvatar.svg(avatar.custom) + "</span>";
+    const wearing = profile.outfit && profile.outfit.wearing;
+    const extra = MGAvatar.accessories ? MGAvatar.accessories(wearing) : "";
+    if (!extra) return inner;
+    return '<span class="portrait-wrap">' + inner + extra + "</span>";
   }
 
   function loadScript(src) {

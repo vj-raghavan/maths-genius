@@ -219,6 +219,19 @@
     ].join("");
   }
 
+  function accessories(wearing) {
+    const list = Array.isArray(wearing) ? wearing : [];
+    const parts = [];
+    if (list.indexOf("cape") >= 0) parts.push('<path d="M36 168 Q20 210 28 228 L172 228 Q180 210 164 168 Q100 188 36 168" fill="#7d5cc6"/>');
+    if (list.indexOf("scarf") >= 0) parts.push('<path d="M62 158 Q100 176 138 158 Q142 172 128 178 Q100 168 72 178 Q58 172 62 158" fill="#e15d3a"/><path d="M124 168 L136 198 L148 168" fill="#e15d3a"/>');
+    if (list.indexOf("bow") >= 0) parts.push('<path d="M78 48 Q60 28 72 52 Q60 76 84 58 Q100 70 116 58 Q140 76 128 52 Q140 28 122 48 Q100 40 78 48" fill="#f08a24"/>');
+    if (list.indexOf("band") >= 0) parts.push('<path d="M58 62 Q100 40 142 62" fill="none" stroke="#14919b" stroke-width="8" stroke-linecap="round"/>');
+    if (list.indexOf("flower") >= 0) parts.push('<g transform="translate(132 58)"><circle r="10" fill="#f4b4c8"/><circle r="4" fill="#f0b429"/></g>');
+    if (list.indexOf("specs") >= 0) parts.push('<g fill="none" stroke="#243044" stroke-width="3"><circle cx="78" cy="112" r="16"/><circle cx="122" cy="112" r="16"/><path d="M94 112 H106"/></g>');
+    if (!parts.length) return "";
+    return '<svg class="accessory-svg" viewBox="0 0 200 230" aria-hidden="true">' + parts.join("") + "</svg>";
+  }
+
   function randomCustom() {
     function one(list) { return list[Math.floor(Math.random() * list.length)]; }
     return sanitise({
@@ -247,6 +260,7 @@
     clothes: clothes,
     sanitise: sanitise,
     svg: svg,
+    accessories: accessories,
     randomCustom: randomCustom
   };
 });

@@ -143,6 +143,7 @@
       MGStorage.update(profile.id, function (draft) {
         draft.escape.bestScore = Math.max(draft.escape.bestScore, score);
         draft.escape.bestTime = Math.max(draft.escape.bestTime, seconds);
+        MGStorage.earn(draft, Math.floor(score / 10));
       });
       const saved = MGStorage.get(profile.id);
       body.innerHTML = '<div class="summary"><h2>The fox caught up</h2><p class="big-score">' + score + " points</p>" +

@@ -438,6 +438,45 @@
     return question;
   }
 
+  function priceQuestion(kind, numbers, seed) {
+    const rng = mulberry32((seed || 1) >>> 0);
+    const level = clamp(Number(numbers.level) || 2, 1, 6);
+    let prompt;
+    let answer;
+    let worked;
+    if (kind === "change") {
+      answer = numbers.pay - numbers.total;
+      prompt = "The seeds cost " + numbers.total + " coins. You pay with " + numbers.pay + " coins. How much change?";
+      worked = numbers.pay + " − " + numbers.total + " = " + answer;
+    } else if (level <= 2 && numbers.qty > 1 && numbers.qty <= 6) {
+      const parts = [];
+      for (let i = 0; i < numbers.qty; i += 1) parts.push(String(numbers.price));
+      answer = numbers.price * numbers.qty;
+      prompt = "Add the prices: " + parts.join(" + ") + ". What is the total?";
+      worked = parts.join(" + ") + " = " + answer;
+    } else {
+      answer = numbers.price * numbers.qty;
+      prompt = numbers.price + " coins × " + numbers.qty + (numbers.qty === 1 ? " seed" : " seeds") + ". What is the total?";
+      worked = numbers.price + " × " + numbers.qty + " = " + answer;
+    }
+    return {
+      kind: "shop",
+      prompt: prompt,
+      answer: String(answer),
+      accept: [String(answer)],
+      choices: numericChoices(rng, answer),
+      worked: worked,
+      visual: null
+    };
+  }
+
+  function dayKey(date) {
+    const y = date.getFullYear();
+    const m = date.getMonth() + 1;
+    const d = date.getDate();
+    return y + "-" + (m < 10 ? "0" : "") + m + "-" + (d < 10 ? "0" : "") + d;
+  }
+
   function searchCharacters(list, query) {
     const text = String(query || "").trim().toLowerCase();
     if (text.length < 2) return { status: "short", results: [] };
@@ -461,6 +500,8 @@
     playingLevel: playingLevel,
     describeLevel: describeLevel,
     tablesForLevel: tablesForLevel,
+    priceQuestion: priceQuestion,
+    dayKey: dayKey,
     norm: norm,
     mulberry32: mulberry32
   };

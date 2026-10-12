@@ -26,7 +26,7 @@
     show(function (root) {
       const body = MGUi.shell(root, { title: "Who is playing?", eyebrow: "Maths Genius" });
       const people = MGStorage.all();
-      body.innerHTML = '<p class="lede">A handful of games for Australian primary years. Names, ages and scores stay on this device.</p><div class="profile-grid"></div><div class="row-actions"><button type="button" class="btn primary add">Add a player</button></div>';
+      body.innerHTML = '<p class="lede">Maths games for Australian primary years. Names, ages and scores stay on this device.</p><div class="profile-grid"></div><div class="row-actions"><button type="button" class="btn primary add">Add a player</button></div>';
       const grid = body.querySelector(".profile-grid");
       if (!people.length) {
         grid.innerHTML = '<div class="empty"><h2>No players yet</h2><p>Add your name, year and an avatar to begin.</p></div>';
@@ -230,37 +230,170 @@
     });
   }
 
+  const TAGS = [
+    ["fun", "Fun"],
+    ["hard", "Too hard"],
+    ["easy", "Too easy"],
+    ["favourite", "Favourite"]
+  ];
+  const SECTIONS = [
+    ["Numbers", [
+      ["maths", "Maths Genius", "Ten questions, stars, and a gentle step up."],
+      ["escape", "Speed Escape", "Answer fast and stay ahead of the fox."],
+      ["blocky", "Blocky Multiplication", "Grow your blocks and clear the course."],
+      ["memory", "Memory Match", "Flip cards to pair a fact with its answer."],
+      ["daily", "Daily Challenge", "One puzzle each day, and a streak if you return."],
+      ["bingo", "Maths Bingo", "Answer the call, then mark it on your card."]
+    ]],
+    ["World", [
+      ["farm", "Grow a Farm", "Your garden, a shop on a timer, and fruit to sell."],
+      ["pet", "Pet Shop", "Earn coins, adopt a pet, and keep it happy."],
+      ["zoo", "Zoo Keeper", "Work out the area, then count the animals."],
+      ["treasure", "Treasure Hunt", "Solve puzzles to cross the island."],
+      ["fish", "Fishing", "Catch the fish carrying the right answer."],
+      ["bake", "Bake Shop", "Measure ingredients and give the right change."]
+    ]],
+    ["Move and make", [
+      ["builder", "3D Builder", "Place colourful blocks and turn the camera."],
+      ["dash", "Animal Dash", "Three lanes, jumps, ducks and bonus gates."],
+      ["drive", "Vehicle Simulator", "A garage, a town, and coins from driving."],
+      ["tictac", "Tic Tac Toe", "Computer, a friend here, or a room."],
+      ["boutique", "Dress-up Boutique", "Spend coins on clothes for your avatar."],
+      ["badges", "Badges and Trophies", "What you have earned across the games."]
+    ]],
+    ["With friends", [
+      ["together", "Play Together", "A private room for a race, building, or tic tac toe."]
+    ]]
+  ];
+  let pendingRate = "";
+  let topRated = false;
+
+  function gameName(id) {
+    let name = "this game";
+    SECTIONS.forEach(function (section) {
+      section[1].forEach(function (game) { if (game[0] === id) name = game[1]; });
+    });
+    return name;
+  }
+
+  function rateDialog(profile, gameId, onDone) {
+    const open = document.querySelector(".rate-modal");
+    if (open) open.remove();
+    const existing = (profile.ratings && profile.ratings[gameId]) || { stars: 0, tags: [] };
+    const picked = { stars: existing.stars || 0, tags: (existing.tags || []).slice() };
+    const modal = document.createElement("div");
+    modal.className = "modal rate-modal";
+    modal.innerHTML = '<div class="panel rate-panel"><h2></h2><p class="note">Choose 1 to 5 stars and any tags that fit. Ratings stay on this device.</p><div class="star-pick"></div><div class="chip-row tags"></div><p class="warn note"></p><div class="row-actions"><button type="button" class="btn primary save-rate">Save</button><button type="button" class="btn ghost skip-rate">Not now</button></div></div>';
+    modal.querySelector("h2").textContent = "Rate " + gameName(gameId);
+    const stars = modal.querySelector(".star-pick");
+    const warn = modal.querySelector(".warn");
+    function paintStars() {
+      stars.innerHTML = "";
+      for (let n = 1; n <= 5; n += 1) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "star-btn" + (n <= picked.stars ? " on" : "");
+        button.setAttribute("aria-label", n + (n === 1 ? " star" : " stars"));
+        button.innerHTML = MGUi.starRow(n <= picked.stars ? 1 : 0, 1);
+        button.addEventListener("click", function () { picked.stars = n; warn.textContent = ""; paintStars(); });
+        stars.appendChild(button);
+      }
+    }
+    paintStars();
+    TAGS.forEach(function (tag) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "chip" + (picked.tags.indexOf(tag[0]) >= 0 ? " on" : "");
+      button.textContent = tag[1];
+      button.addEventListener("click", function () {
+        const index = picked.tags.indexOf(tag[0]);
+        if (index >= 0) picked.tags.splice(index, 1);
+        else picked.tags.push(tag[0]);
+        button.classList.toggle("on");
+      });
+      modal.querySelector(".tags").appendChild(button);
+    });
+    function close(saved) {
+      modal.remove();
+      if (onDone) onDone(saved);
+    }
+    modal.querySelector(".save-rate").addEventListener("click", function () {
+      if (picked.stars < 1) { warn.textContent = "Pick a star first."; return; }
+      MGStorage.setRating(profile.id, gameId, picked.stars, picked.tags);
+      close(true);
+    });
+    modal.querySelector(".skip-rate").addEventListener("click", function () { close(false); });
+    document.body.appendChild(modal);
+  }
+
   function menu() {
     const profile = current();
     if (!profile) { home(); return; }
     show(function (root) {
       const level = MGQuestions.playingLevel(profile.grade, profile.maths.adjust);
       const body = MGUi.shell(root, { title: "Choose a game", eyebrow: MGStorage.gradeLabel(profile.grade), profile: profile });
-      const games = [
-        ["maths", "Maths Genius", "Ten questions, stars, and a gentle step up."],
-        ["builder", "3D Builder", "Place colourful blocks and turn the camera."],
-        ["farm", "Grow a Farm", "Plant seeds, water them, and harvest coins."],
-        ["escape", "Speed Escape", "Answer fast and stay ahead of the fox."],
-        ["dash", "Animal Dash", "Three lanes, jumps, ducks and bonus gates."],
-        ["blocky", "Blocky Multiplication", "Grow your blocks and clear the course."],
-        ["together", "Play Together", "A private room for a race or shared building."]
-      ];
-      body.innerHTML = '<p class="note">Hello <strong></strong>. Maths starts at <span class="level"></span>. Stars: ' + profile.maths.stars + '.</p><div class="card-grid"></div><div class="row-actions"><button type="button" class="btn ghost edit">Edit player</button><button type="button" class="btn ghost switch">Switch player</button></div><p class="note">After the first visit with an internet connection, the single-player games work offline. You can add Maths Genius to your home screen.</p>';
+      const ask = pendingRate;
+      pendingRate = "";
+      body.innerHTML = '<p class="note">Hello <strong></strong>. Maths starts at <span class="level"></span>. Coins: <span class="coins"></span>. Stars: ' + profile.maths.stars + '.</p><div class="row-actions"><button type="button" class="btn secondary sort"></button></div><div class="menu-sections"></div><div class="row-actions"><button type="button" class="btn ghost edit">Edit player</button><button type="button" class="btn ghost switch">Switch player</button></div><p class="note">After the first visit with an internet connection, the single-player games work offline. You can add Maths Genius to your home screen. A game\'s stars are the average of the players on this device.</p>';
       body.querySelector("strong").textContent = profile.name;
       body.querySelector(".level").textContent = MGQuestions.describeLevel(level);
-      const grid = body.querySelector(".card-grid");
-      games.forEach(function (game) {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "game-card";
-        button.innerHTML = "<strong></strong><span></span>";
-        button.querySelector("strong").textContent = game[1];
-        button.querySelector("span").textContent = game[2];
-        button.addEventListener("click", function () { launch(game[0]); });
-        grid.appendChild(button);
-      });
+      body.querySelector(".coins").textContent = String(profile.wallet.coins);
+      const sort = body.querySelector(".sort");
+      sort.textContent = topRated ? "Show sections" : "Top Rated";
+      sort.addEventListener("click", function () { topRated = !topRated; menu(); });
+      const holder = body.querySelector(".menu-sections");
+      const people = MGStorage.all();
+
+      function card(game) {
+        const article = document.createElement("article");
+        article.className = "game-card";
+        const average = MGStorage.averageRating(game[0], people);
+        const rounded = average ? Math.max(1, Math.round(average)) : 0;
+        article.innerHTML = "<strong></strong><span class='blurb'></span><span class='rate-line'></span><div class='row-actions'><button type='button' class='btn ghost rate'>Rate</button><button type='button' class='btn primary play'>Play</button></div>";
+        article.querySelector("strong").textContent = game[1];
+        article.querySelector(".blurb").textContent = game[2];
+        const line = article.querySelector(".rate-line");
+        if (average) {
+          line.innerHTML = MGUi.starRow(rounded, 5) + " <span class='avg'></span>";
+          line.querySelector(".avg").textContent = average.toFixed(1);
+        } else line.textContent = "No ratings yet";
+        article.querySelector(".rate").addEventListener("click", function () {
+          rateDialog(MGStorage.get(profile.id), game[0], function () { menu(); });
+        });
+        article.querySelector(".play").addEventListener("click", function () { launch(game[0]); });
+        return article;
+      }
+
+      if (topRated) {
+        const flat = [];
+        SECTIONS.forEach(function (section) { section[1].forEach(function (game) { flat.push(game); }); });
+        flat.sort(function (a, b) {
+          const diff = MGStorage.averageRating(b[0], people) - MGStorage.averageRating(a[0], people);
+          if (diff) return diff;
+          return a[1].localeCompare(b[1]);
+        });
+        const grid = document.createElement("div");
+        grid.className = "card-grid";
+        flat.forEach(function (game) { grid.appendChild(card(game)); });
+        holder.appendChild(grid);
+      } else {
+        SECTIONS.forEach(function (section) {
+          const block = document.createElement("section");
+          block.className = "menu-section";
+          const heading = document.createElement("h2");
+          heading.className = "section-title";
+          heading.textContent = section[0];
+          const grid = document.createElement("div");
+          grid.className = "card-grid";
+          section[1].forEach(function (game) { grid.appendChild(card(game)); });
+          block.appendChild(heading);
+          block.appendChild(grid);
+          holder.appendChild(block);
+        });
+      }
       body.querySelector(".edit").addEventListener("click", function () { editor(profile.id); });
       body.querySelector(".switch").addEventListener("click", function () { remember(""); home(); });
+      if (ask && MGStorage.GAME_IDS.indexOf(ask) >= 0) rateDialog(profile, ask, function () { menu(); });
     });
   }
 
@@ -274,13 +407,28 @@
       escape: MGEscape,
       dash: MGDash,
       blocky: MGBlocky,
-      together: MGTogether
+      together: MGTogether,
+      tictac: MGTic,
+      pet: MGPet,
+      memory: MGMemory,
+      treasure: MGTreasure,
+      daily: MGDaily,
+      badges: MGBadges,
+      bake: MGBake,
+      zoo: MGZoo,
+      bingo: MGBingo,
+      fish: MGFish,
+      boutique: MGBoutique,
+      drive: MGDrive
     };
     show(function (root) {
       return map[name].mount(root, MGStorage.get(profile.id), function (screen) {
         if (screen === "home") home();
         else if (screen === "together") launch("together");
-        else menu();
+        else {
+          pendingRate = name;
+          menu();
+        }
       });
     });
   }

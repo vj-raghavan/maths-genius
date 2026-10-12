@@ -186,6 +186,7 @@
         MGStorage.update(profile.id, function (draft) {
           draft.dash.highScore = Math.max(draft.dash.highScore, score);
           draft.dash.animal = animal.id;
+          MGStorage.earn(draft, Math.floor(score / 15));
         });
         const best = MGStorage.get(profile.id).dash.highScore;
         window.removeEventListener("keydown", onKey);

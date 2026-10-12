@@ -39,12 +39,28 @@ Remove or edit a player from the start screen. That only deletes data in this br
 
 ## Games
 
-- **Maths Genius** — rounds of 10 questions: addition and subtraction, 2, 5 and 10 times tables (more tables for older grades), skip counting, Australian coins and notes, and telling the time. Answers are multiple choice or typed. Stars are saved.
-- **3D Builder** — a grid floor, coloured blocks, tap to build or remove, and buttons plus dragging to turn and zoom. A line under the grid counts the blocks. The build is saved for that player.
-- **Grow a Farm** — plant seeds, answer a question to water, and watch seed, sprout, plant and harvest. Harvest pays coins. Buying seeds takes a question too. Growth uses the clock, so it continues if you leave the page. Times are short so you can see a full grow in one visit.
-- **Speed Escape** — a times-tables race. Correct answers keep you ahead of the fox, and the fox gets faster. Choose which tables to practise. Best score and longest escape are saved. The idea is in the same family as a speed chase, with original wording and pictures.
-- **Animal Dash** — an endless run on three lanes. Arrows or swipes move, jump and duck. Coins are worth collecting. Some gates show a times-tables question: run through the lane with the right answer for bonus coins. High score and the chosen animal are saved.
-- **Blocky Multiplication** — search the bundled picture library for someone to play as (try dragon, robot or unicorn). Answer times tables to grow a stack of blocks and clear walls, or shrink to fit through a gap. The search never uses the open web. If a word has no picture, the game asks you to try another word. High score and character are saved.
+Coins from every game go into one wallet for that player. The farm, the pet shop, the bake shop, the boutique and the vehicle garage all spend the same coins. Age, grade and the wallet never leave the device.
+
+After a game, and from a Rate button on the menu, a player can give 1 to 5 stars and pick tags: Fun, Too hard, Too easy, Favourite. There is no comment box. Each profile keeps its own rating in local storage. The menu shows the average of every profile on this device, and Top Rated sorts by that average.
+
+- **Maths Genius** — rounds of 10 questions: addition and subtraction, 2, 5 and 10 times tables (more tables for older grades), skip counting, Australian coins and notes, and telling the time. Answers are multiple choice or typed. Stars and coins are saved.
+- **Speed Escape** — a times-tables race. Correct answers keep you ahead of the fox, and the fox gets faster. Choose which tables to practise. Best score and longest escape are saved.
+- **Blocky Multiplication** — search the bundled picture library for someone to play as (try dragon, robot or unicorn). Answer times tables to grow a stack of blocks and clear walls, or shrink to fit through a gap. The search never uses the open web. If a word has no picture, the game asks you to try another word.
+- **Memory Match** — flip cards to pair a sum or times-table fact with its answer.
+- **Daily Challenge** — one puzzle each calendar day. A streak counts if you come back the next day.
+- **Maths Bingo** — a question is called, and a matching answer is marked on the card.
+- **Grow a Farm** — your own garden. The seed shop restocks on a timer, even while you are away, and a long absence restocks once. Crops grow from timestamps, so they continue if you leave. Some plants keep fruiting. A ripe crop can be golden (worth 3 times more) or rainbow (5 times). Sell fruit at the stand, buy seeds, a watering can, a sprinkler, or more plots. Shop totals and change are short questions. Grow times are short enough to see a full cycle in one visit.
+- **Pet Shop** — answer questions to earn coins, adopt a pet, then feed, play and clean. Happiness drops with the clock while you are away.
+- **Zoo Keeper** — work out an enclosure's area, then count the animals.
+- **Treasure Hunt** — answer a question to step across an island map to the treasure.
+- **Fishing** — tap the fish that carries the right answer.
+- **Bake Shop** — measure a fraction of the ingredients, then give the right change in Australian money.
+- **3D Builder** — a grid floor, coloured blocks, tap to build or remove, and buttons plus dragging to turn and zoom. The build is saved for that player.
+- **Animal Dash** — an endless run on three lanes. Arrows or swipes move, jump and duck. Some gates show a times-tables question: run through the lane with the right answer.
+- **Vehicle Simulator** — a garage, then a small town with roads, traffic lights, a farm and a beach. A town car, a scooter and a tractor are free. Everything else, including the race car, the limousine and the red supercar, is bought with wallet coins. Names are generic, with no brand marks. Keyboard or on-screen buttons drive. Coins come from a quiz station, road coins, speed signs, distance and deliveries. Petrol at the red station is a change question. The boat is slow off the water, and the plane flies.
+- **Tic Tac Toe** — easy, medium or hard computer, two players on one device, or online in a Play Together room. An optional question is required to claim a square. Marks are the letters X and O. Wins, losses and draws are saved.
+- **Dress-up Boutique** — spend wallet coins on a scarf, bow, head band, specs, flower crown or cape. Worn items show on the portrait everywhere, including over an animal photo.
+- **Badges and Trophies** — a room of achievements from each game, filled in from saved progress.
 
 ## Play Together
 
@@ -52,10 +68,11 @@ Create a private room and read the short code to a friend. They type the code to
 
 What other players see is a first name and an avatar. Age, grade and the rest of the profile stay in local storage.
 
-Two activities:
+Three activities:
 
 - a maths race with the same questions and live scores (the host picks the year level)
 - shared building in 3D Builder
+- tic tac toe for the host and the first friend to join (everyone else watches). An optional maths question can be required before a square is claimed. The host leaves the board from the room, and if either player leaves the board ends. A modified browser could skip the question; the room is a friendly game, not a secure test.
 
 ### How the connection works
 
@@ -70,6 +87,7 @@ Other limits:
 - Short codes could theoretically clash. There is no directory of open rooms.
 - The race is a friendly game. It is not a secure test.
 - Shared blocks are stored on the host's profile. Guests see the live build.
+- Tic tac toe is for two players. Extra people in the room watch.
 
 ## Pictures and licences
 

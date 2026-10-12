@@ -73,6 +73,7 @@
         draft.maths.correct += correct;
         draft.maths.answered += questions.length;
         draft.maths.adjust = adjust;
+        MGStorage.earn(draft, correct);
       });
       let note = "The next round stays at this challenge.";
       if (adjust > before) note = "Next time the questions will be a little harder.";
