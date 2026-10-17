@@ -1,17 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img">
-  <rect width="480" height="480" fill="#bfe3ff"/>
-  <circle cx="400" cy="72" r="34" fill="#ffe08a"/>
-  <ellipse cx="240" cy="410" rx="230" ry="78" fill="#8fbf6a"/>
-  
-  <rect x="120" y="210" width="240" height="160" fill="#e7dcc4"/>
-  <rect x="100" y="170" width="50" height="200" fill="#efe6d2"/>
-  <rect x="330" y="170" width="50" height="200" fill="#efe6d2"/>
-  <rect x="200" y="150" width="80" height="220" fill="#f4ecda"/>
-  <rect x="228" y="250" width="28" height="70" fill="#6b4a32"/>
-  <rect x="112" y="150" width="14" height="28" fill="#c4473a"/>
-  <rect x="146" y="150" width="14" height="28" fill="#c4473a"/>
-  <rect x="214" y="128" width="16" height="30" fill="#c4473a"/>
-  <rect x="250" y="128" width="16" height="30" fill="#c4473a"/>
-  <rect x="342" y="150" width="14" height="28" fill="#c4473a"/>
-  <rect x="376" y="150" width="14" height="28" fill="#c4473a"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" role="img"><style>.hop{transform-box:fill-box;transform-origin:50% 88%;animation:hop 1.7s ease-in-out 0.48s infinite;}.lid{transform-box:fill-box;transform-origin:center;animation:blink 3.5s ease-in-out 0.6799999999999999s infinite;}@keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}@keyframes blink{0%,86%,100%{transform:scaleY(0.05)}93%{transform:scaleY(1)}}@media (prefers-reduced-motion:reduce){.hop,.lid{animation:none}.lid{opacity:0}}</style><g class="hop"><ellipse cx="100" cy="196" rx="54" ry="10" fill="#000" opacity="0.08"/><ellipse cx="62" cy="48" rx="16" ry="40" fill="#7d5cc6" stroke="#243044" stroke-width="3"/><ellipse cx="138" cy="48" rx="16" ry="40" fill="#7d5cc6" stroke="#243044" stroke-width="3"/><ellipse cx="62" cy="52" rx="8" ry="24" fill="#f4b4c8"/><ellipse cx="138" cy="52" rx="8" ry="24" fill="#f4b4c8"/><ellipse cx="100" cy="124" rx="62" ry="58" fill="#7d5cc6" stroke="#243044" stroke-width="4"/><ellipse cx="100" cy="142" rx="36" ry="28" fill="#fff"/><ellipse cx="70" cy="132" rx="10" ry="6" fill="#f4b4c8" opacity="0.8"/><ellipse cx="130" cy="132" rx="10" ry="6" fill="#f4b4c8" opacity="0.8"/><ellipse cx="76" cy="112" rx="12" ry="14" fill="#fff" stroke="#243044" stroke-width="3"/><circle cx="77" cy="113" r="5.5" fill="#243044"/><circle cx="79" cy="110" r="2" fill="#fff"/><ellipse class="lid" cx="76" cy="112" rx="12" ry="14" fill="#7d5cc6"/><ellipse cx="124" cy="112" rx="12" ry="14" fill="#fff" stroke="#243044" stroke-width="3"/><circle cx="125" cy="113" r="5.5" fill="#243044"/><circle cx="127" cy="110" r="2" fill="#fff"/><ellipse class="lid" cx="124" cy="112" rx="12" ry="14" fill="#7d5cc6"/><path d="M84 136 Q100 150 116 136" fill="none" stroke="#243044" stroke-width="3" stroke-linecap="round"/></g></svg>

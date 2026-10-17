@@ -75,7 +75,7 @@ img { max-width: 100%; }
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  object-fit: cover;
+  object-fit: contain;
   background: #ffe8c2;
   display: inline-flex;
   overflow: hidden;
@@ -126,7 +126,11 @@ img { max-width: 100%; }
 .game-card strong { display: block; font-size: 1.3rem; margin-bottom: 6px; }
 .game-card span { display: block; font-size: 1.02rem; }
 .profile-card, .animal-pick, .search-card { padding: 12px; text-align: center; }
-.profile-card img, .animal-pick img, .search-card img, .search-card svg { width: 100%; height: 120px; object-fit: cover; border-radius: 16px; background: #efe2d0; }
+.profile-card img, .animal-pick img, .search-card img, .search-card svg { width: 100%; height: 120px; object-fit: contain; border-radius: 16px; background: #fff4d6; }
+.plot img, .coin img, .fish img, .garage img, .vehicle-swatch { object-fit: contain; background: #fff6ea; }
+.cheer { position: fixed; left: 50%; top: 18%; z-index: 20; width: 140px; margin-left: -70px; animation: cheer 0.9s ease forwards; pointer-events: none; }
+.cheer img { width: 140px; height: 150px; }
+@keyframes cheer { 0% { transform: translateY(20px) scale(0.6); opacity: 0; } 35% { transform: translateY(0) scale(1.08); opacity: 1; } 100% { transform: translateY(-24px) scale(1); opacity: 0; } }
 .empty {
   padding: 28px;
   background: var(--card);
@@ -212,7 +216,7 @@ img { max-width: 100%; }
 .farm-layout, .builder-layout, .play-layout { display: grid; gap: 14px; }
 .plot-grid { grid-template-columns: repeat(2, 1fr); }
 .plot { padding: 10px; min-height: 180px; display: flex; flex-direction: column; gap: 6px; }
-.plot img { width: 100%; height: 110px; object-fit: cover; border-radius: 14px; background: #d7c4a3; }
+.plot img { width: 100%; height: 110px; object-fit: contain; border-radius: 14px; background: #fff6ea; }
 .plot img.sprout { object-fit: contain; background: #efe2c9; }
 .plot .bar { height: 10px; background: #efe2c9; border-radius: 99px; overflow: hidden; }
 .plot .bar span { display: block; height: 100%; background: var(--green); }
@@ -245,7 +249,7 @@ img { max-width: 100%; }
   width: 84px;
   height: 84px;
   border-radius: 50%;
-  object-fit: cover;
+  object-fit: contain;
   background: #fff;
   border: 3px solid #fff;
   transition: left 0.25s linear;
@@ -310,7 +314,7 @@ img { max-width: 100%; }
 .zoo-cell { min-height: 48px; border-radius: 10px; border: 2px solid var(--line); background: #efe2c9; }
 .pond { position: relative; height: 320px; overflow: hidden; border-radius: 24px; background: #8fd0e8; }
 .fish { position: absolute; left: 0; display: flex; align-items: center; gap: 8px; background: #fff; border: 3px solid #fff; border-radius: 999px; padding: 4px 12px 4px 4px; font-weight: 800; animation: swim 9s linear infinite; }
-.fish img { width: 72px; height: 52px; object-fit: cover; border-radius: 16px; }
+.fish img { width: 72px; height: 52px; object-fit: contain; border-radius: 16px; background: #fff; }
 .fish:nth-child(2) { animation-duration: 11s; }
 .fish:nth-child(3) { animation-duration: 7s; }
 .fish:nth-child(4) { animation-duration: 13s; }
@@ -322,4 +326,5 @@ img { max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   .race .runner, .race .chaser { transition: none; }
   .fish { animation: none; left: 8%; }
+  .cheer { animation: none; }
 }

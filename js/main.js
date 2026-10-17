@@ -73,7 +73,7 @@
       body.innerHTML = '<form class="creator-form"><div class="creator"><div class="avatar-stage"></div><div><label class="field">Name<input class="name-input" maxlength="24" autocomplete="nickname" required></label>' +
         '<div class="field"><span>Grade</span><div class="chip-row grades"></div></div>' +
         '<div class="field"><span>Age</span><div class="chip-row ages"></div></div>' +
-        '<div class="chip-row"><button type="button" class="chip tab on" data-tab="draw">Design an avatar</button><button type="button" class="chip tab" data-tab="animal">Animal photo</button></div>' +
+        '<div class="chip-row"><button type="button" class="chip tab on" data-tab="draw">Design an avatar</button><button type="button" class="chip tab" data-tab="animal">Animal picture</button></div>' +
         '<div class="draw-box"></div><div class="animal-box hidden"></div>' +
         '<p class="note">Age and grade are used only to choose a starting maths level. They are never sent anywhere.</p>' +
         '<p class="warn note"></p><div class="row-actions"><button class="btn primary" type="submit">Save player</button>' +

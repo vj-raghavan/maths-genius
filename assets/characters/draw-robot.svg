@@ -1,17 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img">
-  <rect width="480" height="480" fill="#d7ecff"/>
-  <circle cx="400" cy="72" r="34" fill="#ffe08a"/>
-  <ellipse cx="240" cy="410" rx="230" ry="78" fill="#cfd8e3"/>
-  
-  <rect x="150" y="210" width="180" height="140" rx="24" fill="#4aa3d8"/>
-  <rect x="168" y="228" width="144" height="70" rx="12" fill="#e8f6ff"/>
-  <circle cx="210" cy="262" r="12" fill="#1d2a24"/>
-  <circle cx="270" cy="262" r="12" fill="#1d2a24"/>
-  <rect x="206" y="292" width="70" height="10" rx="5" fill="#f0b429"/>
-  <rect x="120" y="240" width="30" height="70" rx="12" fill="#2f7ea8"/>
-  <rect x="330" y="240" width="30" height="70" rx="12" fill="#2f7ea8"/>
-  <rect x="180" y="350" width="36" height="50" rx="12" fill="#2f7ea8"/>
-  <rect x="264" y="350" width="36" height="50" rx="12" fill="#2f7ea8"/>
-  <rect x="214" y="160" width="52" height="28" rx="10" fill="#f0b429"/>
-  <circle cx="240" cy="150" r="14" fill="#e15d3a"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" role="img"><style>.hop{transform-box:fill-box;transform-origin:50% 88%;animation:hop 1.7s ease-in-out 0.96s infinite;}.lid{transform-box:fill-box;transform-origin:center;animation:blink 3.5s ease-in-out 1.16s infinite;}@keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}@keyframes blink{0%,86%,100%{transform:scaleY(0.05)}93%{transform:scaleY(1)}}@media (prefers-reduced-motion:reduce){.hop,.lid{animation:none}.lid{opacity:0}}</style><g class="hop"><rect x="48" y="64" width="104" height="90" rx="16" fill="#d7eef8" stroke="#243044" stroke-width="4"/><rect x="92" y="40" width="16" height="24" fill="#7d5cc6"/><circle cx="100" cy="34" r="10" fill="#f0b429" stroke="#243044" stroke-width="3"/><ellipse cx="76" cy="100" rx="12" ry="14" fill="#fff" stroke="#243044" stroke-width="3"/><circle cx="77" cy="101" r="5.5" fill="#243044"/><circle cx="79" cy="98" r="2" fill="#fff"/><ellipse class="lid" cx="76" cy="100" rx="12" ry="14" fill="#d7eef8"/><ellipse cx="124" cy="100" rx="12" ry="14" fill="#fff" stroke="#243044" stroke-width="3"/><circle cx="125" cy="101" r="5.5" fill="#243044"/><circle cx="127" cy="98" r="2" fill="#fff"/><ellipse class="lid" cx="124" cy="100" rx="12" ry="14" fill="#d7eef8"/><rect x="78" y="128" width="44" height="8" rx="4" fill="#243044"/></g></svg>

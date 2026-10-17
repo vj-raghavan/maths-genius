@@ -123,6 +123,13 @@
       const correct = MGQuestions.matches(question, value);
       container.querySelectorAll("button").forEach(function (item) { item.disabled = true; });
       if (button) button.classList.add(correct ? "good" : "bad");
+      if (correct) {
+        const pop = document.createElement("div");
+        pop.className = "cheer";
+        pop.innerHTML = '<img src="assets/characters/star-1.svg" alt="">';
+        document.body.appendChild(pop);
+        window.setTimeout(function () { pop.remove(); }, 900);
+      }
       if (!correct) {
         container.querySelectorAll("button").forEach(function (item) {
           if (MGQuestions.matches(question, item.dataset.value || item.textContent)) item.classList.add("good");

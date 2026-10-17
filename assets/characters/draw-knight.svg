@@ -1,14 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img">
-  <rect width="480" height="480" fill="#d5e4f7"/>
-  <circle cx="400" cy="72" r="34" fill="#ffe08a"/>
-  <ellipse cx="240" cy="410" rx="230" ry="78" fill="#7eaa62"/>
-  
-  <rect x="190" y="150" width="100" height="90" rx="16" fill="#d9dee6"/>
-  <rect x="205" y="185" width="70" height="18" fill="#8ec8f5"/>
-  <rect x="175" y="230" width="130" height="110" rx="16" fill="#8d97a8"/>
-  <rect x="150" y="240" width="30" height="80" rx="10" fill="#7e8796"/>
-  <rect x="300" y="240" width="30" height="80" rx="10" fill="#7e8796"/>
-  <rect x="200" y="340" width="28" height="50" rx="8" fill="#6e7684"/>
-  <rect x="252" y="340" width="28" height="50" rx="8" fill="#6e7684"/>
-  <rect x="300" y="200" width="12" height="120" fill="#c0c6d0"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" role="img"><style>.hop{transform-box:fill-box;transform-origin:50% 88%;animation:hop 1.7s ease-in-out 0.48s infinite;}.lid{transform-box:fill-box;transform-origin:center;animation:blink 3.5s ease-in-out 0.6799999999999999s infinite;}@keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}@keyframes blink{0%,86%,100%{transform:scaleY(0.05)}93%{transform:scaleY(1)}}@media (prefers-reduced-motion:reduce){.hop,.lid{animation:none}.lid{opacity:0}}</style><g class="hop"><ellipse cx="100" cy="196" rx="54" ry="10" fill="#000" opacity="0.08"/><ellipse cx="62" cy="62" rx="22" ry="22" fill="#f08a24" stroke="#243044" stroke-width="3"/><ellipse cx="138" cy="62" rx="22" ry="22" fill="#f08a24" stroke="#243044" stroke-width="3"/><ellipse cx="100" cy="124" rx="62" ry="58" fill="#f08a24" stroke="#243044" stroke-width="4"/><ellipse cx="100" cy="142" rx="36" ry="28" fill="#fff"/><ellipse cx="70" cy="132" rx="10" ry="6" fill="#f4b4c8" opacity="0.8"/><ellipse cx="130" cy="132" rx="10" ry="6" fill="#f4b4c8" opacity="0.8"/><ellipse cx="76" cy="112" rx="12" ry="14" fill="#fff" stroke="#243044" stroke-width="3"/><circle cx="77" cy="113" r="5.5" fill="#243044"/><circle cx="79" cy="110" r="2" fill="#fff"/><ellipse class="lid" cx="76" cy="112" rx="12" ry="14" fill="#f08a24"/><ellipse cx="124" cy="112" rx="12" ry="14" fill="#fff" stroke="#243044" stroke-width="3"/><circle cx="125" cy="113" r="5.5" fill="#243044"/><circle cx="127" cy="110" r="2" fill="#fff"/><ellipse class="lid" cx="124" cy="112" rx="12" ry="14" fill="#f08a24"/><path d="M84 136 Q100 150 116 136" fill="none" stroke="#243044" stroke-width="3" stroke-linecap="round"/></g></svg>

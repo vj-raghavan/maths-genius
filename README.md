@@ -31,7 +31,7 @@ On the start screen, pick a player or add one. A player has:
 - an age from 5 to 12
 - an avatar
 
-The avatar can be a drawn portrait (skin tone, face shape, hair, eyes, glasses, freckles, headwear and clothing) or a photograph of an animal. The portrait is drawn in the browser. The camera is never used, and photos of the child are never uploaded.
+The avatar can be a drawn portrait (skin tone, face shape, hair, eyes, glasses, freckles, headwear and clothing) or an animated cartoon animal. The portrait is drawn in the browser. The camera is never used, and photos of the child are never uploaded.
 
 Grade chooses the starting difficulty for Maths Genius and for the maths inside the other games. If a round goes very well, the next one steps up a little. If it is a struggle, the next one eases off. Age and grade never leave the device.
 
@@ -91,7 +91,7 @@ Other limits:
 
 ## Pictures and licences
 
-Photographs and the font licence are listed in [CREDITS.md](CREDITS.md). Pictures are files in this repository, not hotlinked. Clock faces and designed avatars are original SVG drawings. Obstacle shapes in Animal Dash are drawn on the canvas so they stay easy to read while running; the runner and the coins are photographs.
+Pictures and the font licence are listed in [CREDITS.md](CREDITS.md). Pictures are files in this repository, not hotlinked. Characters, animals, crops, money, vehicles and scenes are original cartoon SVGs with a small bounce and blink. Clock faces and designed avatars are original SVG drawings too. Obstacle shapes in Animal Dash are drawn on the canvas so they stay easy to read while running.
 
 Three.js and Trystero are MIT licensed. Copies of those licences are in `vendor/`. Nunito is used under the SIL Open Font License (`assets/fonts/OFL.txt`).
 

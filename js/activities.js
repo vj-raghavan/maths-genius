@@ -507,7 +507,7 @@
   function fishMount(root, profile, go) {
     let timer = 0;
     const body = MGUi.shell(root, { title: "Fishing", eyebrow: "Catch the right answer", profile: profile, back: function () { window.clearTimeout(timer); go("menu"); } });
-    const photos = ["assets/characters/fish-1.jpg", "assets/characters/draw-fish.svg", "assets/characters/dolphin-1.jpg", "assets/characters/whale-1.jpg"];
+    const photos = ["assets/characters/fish-1.svg", "assets/characters/dolphin-1.svg", "assets/characters/whale-1.svg", "assets/characters/crab-1.svg"];
     function cast() {
       const current = MGStorage.get(profile.id);
       const item = MGQuestions.makeTimesQuestion(levelOf(current), Date.now() >>> 0);

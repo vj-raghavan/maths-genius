@@ -7,11 +7,11 @@
   const GRADE_LEVEL = { prep: 1, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6 };
 
   const FALLBACK_MONEY = [
-    { id: "5c", name: "5 cent coin", cents: 5, kind: "coin", src: "assets/money/coin-5c.jpg" },
-    { id: "20c", name: "20 cent coin", cents: 20, kind: "coin", src: "assets/money/coin-20c.jpg" },
-    { id: "50c", name: "50 cent coin", cents: 50, kind: "coin", src: "assets/money/coin-50c.jpg" },
-    { id: "n5", name: "5 dollar note", cents: 500, kind: "note", src: "assets/money/note-5.jpg" },
-    { id: "n10", name: "10 dollar note", cents: 1000, kind: "note", src: "assets/money/note-10.jpg" }
+    { id: "5c", name: "5 cent coin", cents: 5, kind: "coin", src: "assets/money/coin-5c.svg" },
+    { id: "20c", name: "20 cent coin", cents: 20, kind: "coin", src: "assets/money/coin-20c.svg" },
+    { id: "50c", name: "50 cent coin", cents: 50, kind: "coin", src: "assets/money/coin-50c.svg" },
+    { id: "n5", name: "5 dollar note", cents: 500, kind: "note", src: "assets/money/note-5.svg" },
+    { id: "n10", name: "10 dollar note", cents: 1000, kind: "note", src: "assets/money/note-10.svg" }
   ];
 
   function mulberry32(seed) {

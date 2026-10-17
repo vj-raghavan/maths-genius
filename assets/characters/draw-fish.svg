@@ -1,12 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img">
-  <rect width="480" height="480" fill="#b7e4f8"/>
-  <circle cx="400" cy="72" r="34" fill="#ffe08a"/>
-  <ellipse cx="240" cy="410" rx="230" ry="78" fill="#2f7dd1"/>
-  
-  <ellipse cx="250" cy="250" rx="110" ry="60" fill="#f08a24"/>
-  <polygon points="340,250 410,200 410,300" fill="#e07a3d"/>
-  <circle cx="190" cy="240" r="10" fill="#1d2a24"/>
-  <circle cx="186" cy="238" r="3" fill="#fff"/>
-  <path d="M220 210 Q250 170 280 210" fill="#ffe08a"/>
-  <path d="M150 300 Q240 340 330 300" fill="none" stroke="#2f7dd1" stroke-width="10"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" role="img"><style>.hop{transform-box:fill-box;transform-origin:50% 88%;animation:hop 1.7s ease-in-out 0.12s infinite;}.lid{transform-box:fill-box;transform-origin:center;animation:blink 3.5s ease-in-out 0.32s infinite;}@keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}@keyframes blink{0%,86%,100%{transform:scaleY(0.05)}93%{transform:scaleY(1)}}@media (prefers-reduced-motion:reduce){.hop,.lid{animation:none}.lid{opacity:0}}</style><g class="hop"><ellipse cx="96" cy="116" rx="58" ry="32" fill="#2f7dd1" stroke="#243044" stroke-width="4"/><path d="M150 116 L184 86 V146 Z" fill="#14919b" stroke="#243044" stroke-width="3"/><ellipse cx="70" cy="110" rx="8" ry="10" fill="#fff" stroke="#243044" stroke-width="3"/><circle cx="71" cy="111" r="5.5" fill="#243044"/><circle cx="73" cy="108" r="2" fill="#fff"/><ellipse class="lid" cx="70" cy="110" rx="8" ry="10" fill="#2f7dd1"/><ellipse cx="70" cy="110" rx="8" ry="10" fill="#fff" stroke="#243044" stroke-width="3"/><circle cx="71" cy="111" r="5.5" fill="#243044"/><circle cx="73" cy="108" r="2" fill="#fff"/><ellipse class="lid" cx="70" cy="110" rx="8" ry="10" fill="#2f7dd1"/></g></svg>
