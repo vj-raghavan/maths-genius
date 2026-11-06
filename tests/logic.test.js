@@ -157,6 +157,14 @@ test("the daily key follows the calendar date", function () {
   assert.equal(questions.dayKey(new Date(2026, 0, 5)), "2026-01-05");
 });
 
+test("the park keeps the player out of the pond until the bridge is open", function () {
+  const park = require("../js/park.js");
+  assert.equal(park.inPond(820, 540), true);
+  assert.equal(park.blocked(820, 540, false), true);
+  assert.equal(park.blocked(820, 540, true), false);
+  assert.equal(park.blocked(220, 900, false), false);
+});
+
 test("ratings average the stars on this device and drop unknown tags", function () {
   const profiles = [
     { ratings: { maths: { stars: 5, tags: ["fun"] } } },

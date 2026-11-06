@@ -484,7 +484,7 @@
     return profile;
   }
 
-  const GAME_IDS = ["maths", "builder", "farm", "escape", "dash", "blocky", "together", "tictac", "pet", "memory", "treasure", "daily", "badges", "bake", "zoo", "bingo", "fish", "boutique", "drive"];
+  const GAME_IDS = ["maths", "builder", "farm", "escape", "dash", "blocky", "together", "tictac", "pet", "memory", "treasure", "daily", "badges", "bake", "zoo", "bingo", "fish", "boutique", "drive", "park"];
   const RATE_TAGS = ["fun", "hard", "easy", "favourite"];
   const OUTFIT_IDS = ["scarf", "bow", "cape", "flower", "specs", "band"];
   const FREE_VEHICLES = ["town-car", "scooter", "tractor"];

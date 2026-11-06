@@ -5,7 +5,7 @@ Ages, grades and scores are not part of these files. Nothing here is loaded from
 
 Characters, animals, crops, pets, vehicles, coins, notes and game scenes are original SVG drawings made for this project. They bounce and blink with CSS inside the SVG. They are not photographs, not emoji, and not copied from any other maths site. Cartoon coins and notes show the value and a simple face. They are not copies of real Australian coin or note designs.
 
-Clock faces in the maths questions, and the portraits children design, are also original SVG drawings. The camera is never used, and photos of the child are never uploaded.
+Clock faces in the maths questions, the portraits children design, and the Sunny Steps Park thumbnail are also original SVG drawings. The camera is never used, and photos of the child are never uploaded.
 
 The Nunito font (assets/fonts) is by Vernon Adams and contributors, licensed under the SIL Open Font License 1.1. See assets/fonts/OFL.txt.
 

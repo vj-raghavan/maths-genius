@@ -256,6 +256,7 @@
     ["Move and make", [
       ["builder", "3D Builder", "Place colourful blocks and turn the camera."],
       ["dash", "Animal Dash", "Three lanes, jumps, ducks and bonus gates."],
+      ["park", "Sunny Steps Park", "Walk the park with the joystick and answer at each stop."],
       ["drive", "Vehicle Simulator", "A garage, a town, and coins from driving."],
       ["tictac", "Tic Tac Toe", "Computer, a friend here, or a room."],
       ["boutique", "Dress-up Boutique", "Spend coins on clothes for your avatar."],
@@ -350,6 +351,13 @@
         const average = MGStorage.averageRating(game[0], people);
         const rounded = average ? Math.max(1, Math.round(average)) : 0;
         article.innerHTML = "<strong></strong><span class='blurb'></span><span class='rate-line'></span><div class='row-actions'><button type='button' class='btn ghost rate'>Rate</button><button type='button' class='btn primary play'>Play</button></div>";
+        if (game[0] === "park") {
+          const thumb = document.createElement("img");
+          thumb.className = "game-thumb";
+          thumb.alt = "";
+          thumb.src = "assets/park/thumb.svg";
+          article.insertBefore(thumb, article.firstChild);
+        }
         article.querySelector("strong").textContent = game[1];
         article.querySelector(".blurb").textContent = game[2];
         const line = article.querySelector(".rate-line");
@@ -419,7 +427,8 @@
       bingo: MGBingo,
       fish: MGFish,
       boutique: MGBoutique,
-      drive: MGDrive
+      drive: MGDrive,
+      park: MGPark
     };
     show(function (root) {
       return map[name].mount(root, MGStorage.get(profile.id), function (screen) {
